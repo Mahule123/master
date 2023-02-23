@@ -1,1 +1,10 @@
-
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: daemon
+  labels:
+    app: daemon
+spec:
+  containers:
+    name: nginx
+    image: nginx
