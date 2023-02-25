@@ -25,7 +25,7 @@ kind: Service
 metadata:
   name: my-service
 spec:
-  type: LoadBalancer
+  type: nodePort
   selector:
     app: nginx
   ports:
