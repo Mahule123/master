@@ -9,4 +9,13 @@ spec:
     AwsElasticBlockStore
       VolumeID: vol-05971f32eddfea4ed
       fsType: ext4 
-     
+     ---
+     apiVersion: v1
+     kind: PersistantVolumeClaim
+     metadata:
+       name: pvc-demo
+     spec:
+       accessmode: ReadwriteOnce
+       resource:
+         request:
+           storage: 500Mi
