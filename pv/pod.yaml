@@ -1,0 +1,12 @@
+apiVersin: v1
+kind: PersistantVolume
+metadata:
+  name: pv-demo
+spec:
+  accessMode:
+  - ReadWriteOnce
+    capacity: 1Gi
+    AwsElasticBlockStore
+      VolumeID: vol-05971f32eddfea4ed
+      fsType: ext4 
+     
