@@ -3,11 +3,12 @@ kind: PersistantVolume
 metadata:
   name: pv-demo
 spec:
+  storageClassName: standard
   accessMode:
   - ReadWriteOnce
     capacity: 1Gi
     AwsElasticBlockStore
-      VolumeID: vol-05971f32eddfea4ed
+      VolumeID: vol-0e89451c9071f37ea
       fsType: ext4 
      ---
      apiVersion: v1
@@ -29,9 +30,9 @@ spec:
   - name: pv-pod
     image: nginx
     volumeMounts:
-    - mountPath: "/var/www/html"
+    - mountPath: "/var/persistent"
       name: pv-pod
-    volumes:
+  volumes:
     - name: pod-pv
       persistantVolumeClaim:
         claimName: pvc-demo
