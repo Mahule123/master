@@ -1,23 +1,21 @@
 apiVersion: apps/v1
-kind: Replicasets
+kind: ReplicaSet
 metadata:
-  name: replicas
+  name: frontend
   labels:
-    app: replicas
+    app: guestbook
+    tier: frontend
 spec:
+  # modify replicas according to your case
   replicas: 3
   selector:
     matchLabels:
-      app: replicas
+      tier: frontend
   template:
     metadata:
       labels:
-        app: replicas
+        tier: frontend
     spec:
       containers:
-      - name: ngiinx
+      - name: php-redis
         image: nginx
-      ports:
-        port: 80
-        targetPort: 80
-        nodePort: 30001
