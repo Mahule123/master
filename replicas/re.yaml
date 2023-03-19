@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Replicasets
+metadata:
+  name: replicas
+  labels:
+    app: replicas
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: replicas
+  template:
+    metadata:
+      labels:
+        app: replicas
+    spec:
+      containers:
+      - name: ngiinx
+        image: nginx
+      ports:
+        port: 80
+        targetPort: 80
+        nodePort: 30001
