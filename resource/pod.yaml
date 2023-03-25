@@ -1,0 +1,12 @@
+apiversion: v1
+kind: Resource
+metadata:
+  name: resource-name
+data:
+  reources:
+    request:
+     cpu: "50mi"
+     memory: "250MiB"
+   limits:
+     cpu: "80mi"
+     memory: "500MiB"
