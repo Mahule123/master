@@ -7,9 +7,10 @@ metadata:
     types: front-end
 spec:
   replicas: 3
-  matchLabels:
-    app: nginx
-  templates:
+  selector:
+    matchLabels:
+      app: nginx
+  template:
     metadata:
       labels:
         app: nginx
