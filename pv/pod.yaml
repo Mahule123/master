@@ -29,18 +29,30 @@ spec:
 
 ---
 
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: my-pod
+  name: dep-pod
+  labels:
+    app: nginx
+    types: front-end
 spec:
-  containers:
-  - name: my-container
-    image: nginx
-    volumeMounts:
-    - name: my-volume
-      mountPath: /data
-  volumes:
-  - name: my-volume
-    persistentVolumeClaim:
-      claimName: my-pvc
+  replicas: 5
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        volumeMounts:
+        - name: my-volume
+          mountPath: /data
+      volumes:
+      - name: my-volume
+        persistentVolumeClaim:
+          claimName: my-pvc
