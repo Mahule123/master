@@ -12,34 +12,4 @@ spec:
   storageClassName: standard
   hostPath:
     path: /data/my-pv
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: my-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi
-  storageClassName: standard
 
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: my-pod
-spec:
-  containers:
-    - name: my-container
-      image: nginx
-      volumeMounts:
-        - name: my-volume
-          mountPath: /var/www/html
-  volumes:
-    - name: my-volume
-      persistentVolumeClaim:
-        claimName: my-pvc
-        ---
-        
