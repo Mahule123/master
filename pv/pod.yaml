@@ -1,38 +1,45 @@
-apiVersin: v1
-kind: PersistantVolume
+# Create a PersistentVolume
+apiVersion: v1
+kind: PersistentVolume
 metadata:
-  name: pv-demo
+  name: my-pv
 spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
   storageClassName: standard
-  accessMode:
-  - ReadWriteOnce
-    capacity: 1Gi
-    AwsElasticBlockStore
-      VolumeID: vol-0e89451c9071f37ea
-      fsType: ext4 
-     ---
-     apiVersion: v1
-     kind: PersistantVolumeClaim
-     metadata:
-       name: pvc-demo
-     spec:
-       accessmode: ReadwriteOnce
-       resource:
-         request:
-           storage: 500Mi
+  hostPath:
+    path: /data/my-pv
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: standard
+
 ---
 apiVersion: v1
 kind: Pod
 metadata:
-  name: pv-pod
+  name: my-pod
 spec:
   containers:
-  - name: pv-pod
-    image: nginx
-    volumeMounts:
-    - mountPath: "/var/persistent"
-      name: pv-pod
+    - name: my-container
+      image: nginx
+      volumeMounts:
+        - name: my-volume
+          mountPath: /var/www/html
   volumes:
-    - name: pod-pv
-      persistantVolumeClaim:
-        claimName: pvc-demo
+    - name: my-volume
+      persistentVolumeClaim:
+        claimName: my-pvc
+        ---
+        
