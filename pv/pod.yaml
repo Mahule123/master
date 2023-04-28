@@ -37,7 +37,7 @@ metadata:
     app: nginx
     types: front-end
 spec:
-  replicas: 3
+  replicas: 4
   selector:
     matchLabels:
       app: nginx
